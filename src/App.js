@@ -4,16 +4,22 @@ import Products from './Products';
 const App = () => {
   const [search,setSearch] = useState('');
   const [data,setData] = useState([]);
-  const YOUR_APP_ID = "8aecf864";
-  const YOUR_APP_KEY ="b460ca299374805ea2ad4be4f6ea081a";
-  const submitHandler = e =>{
+  // EDAMAM API ID & KEYS
+  const YOUR_APP_ID = "6564f6a7";    
+  const YOUR_APP_KEY ="3fc8b032447a77f21e3341aea8be1259";
+  const submitHandler = (e) => {
     e.preventDefault();
-    fetch(`https://api.edamam.com/search?q=${search}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=30&calories=591-722&health=alcohol-free`).then(
-      response => response.json()
-    ).then(
-      data => setData(data.hits)
-    )
-  }
+    fetch(`https://api.edamam.com/search?q=${search}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=12&calories=591-722&health=alcohol-free`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Data from API:', data);
+        setData(data.hits);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  };
+  
   return (
     <div>
       <center>
